@@ -1,0 +1,1327 @@
+/* usos globais */
+
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+  --primary-clr: #1C5845;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bruno Ace", sans-serif;
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-clr);
+  border-radius: 50px;
+}
+
+/* body */
+body {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+/* cont: usado como conteiner da parte esquerda  */
+.cont {
+  width: 80%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+}
+
+/* add-event-wrapper: usado como modal principal para colocar dados de lembretes  */
+.add-event-wrapper {
+  position: absolute;
+  width: 50%;
+  max-height: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: var(--primary-clr);
+  transform: translateX(-50%);
+  transition: max-height 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* add-event-wrapper.active: quando o modal é aberto  */
+.add-event-wrapper.active {
+  max-height: 70%;
+  transition: max-height 1s ease;
+}
+
+/* add-event-header: é a parte em cime onde está o titulo do lembrete e o botão de fechar */
+.add-event-header {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: #E4D5C7;
+  border-bottom: 3px solid #ffffff;
+}
+
+.add-event-header .close {
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+.add-event-header .title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #E4D5C7;
+
+}
+
+/* add-event-body: é o corpo do modal, onde o conteúdo é colocado */
+.add-event-body {
+  width: 100%;
+  height: 475px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px;
+  background-color: var(--primary-clr);
+}
+
+/* enunciado: é o titulo de cada input */
+.enunciado {
+  color: #E4D5C7;
+  left: 0;
+  margin: 20px 10px;
+  top: -90px;
+  font-size: 1.5rem;
+  margin-bottom: -25px;
+}
+
+/* add-event-input: é o conjunto do input e o ef_traz */
+.add-event-body .add-event-input {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  top: 60px;
+  margin-bottom: 30px;
+  position: relative;
+  transition: 0.5s ease linear;
+}
+
+/* ef_traz: serve para dar o efeito de precionado */
+.add-event-body .add-event-input .ef_traz {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background-color: #95877A;
+  padding: 0 20px;
+  margin-bottom: 55px;
+  border-radius: 7px;
+  top: -23px;
+}
+
+/* add-event-input input: é o input para guardar os dados */
+.add-event-body .add-event-input input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  border: 3px solid #95877A;
+  background-color: #e0e0e0;
+  padding: 0 20px;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #373c4f;
+  margin-bottom: 55px;
+  border-radius: 7px;
+  position: absolute;
+  transition: 0.5s ease linear;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.add-event-body .add-event-input input::placeholder {
+  color: rgba(148, 135, 122, 0.5);
+}
+
+/* input:active: serve para dar o efeito de profundidade */
+.add-event-body .add-event-input input:active {
+  transform: translateY(5px);
+}
+
+/* cont_time: serve para juntar os inputs de tempo */
+.cont_time {
+  width: 37%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  top: 40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* time: é uma estilização para deixar o input com um determinado tamanho */
+.add-event-input.time {
+  width: 120px !important;
+
+}
+
+/* input.event-time-from: serve para estilizar o input do primeiro tempo */
+.add-event-body .add-event-input input.event-time-from {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 2px;
+}
+
+/* input.event-time-to: serve para estilizar o input do último tempo */
+.add-event-body .add-event-input input.event-time-to {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 2px;
+}
+
+/* cont_times: serve para juntar os inputs de cor e usuario */
+.cont_times {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  top: 40px;
+  margin-top: 35px;
+  margin-bottom: 15px;
+  padding: 6px;
+}
+
+/* input-cor: input onde irá guardar as cores  */
+.input-cor {
+  max-width: 40px;
+  margin-right: 30px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+}
+
+/* bt_cor: estilização do botão da cor */
+.bt_cor {
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+  width: 120% !important;
+  height: 120% !important;
+  border: none !important;
+}
+
+/* cor_escolhida: serve para mostrar a cor e abrirá o modal */
+.cor_escolhida {
+  z-index: 10000000000000000;
+  background-color: darkcyan;
+  position: absolute;
+  width: 80% !important;
+  height: 80% !important;
+  top: -60%;
+}
+
+.cor_escolhida:active,
+.cor_escolhida:active+input.bt_cor {
+  transform: translateY(8px);
+}
+
+/* input-cont: serve para juntar os conjuntos do usuario */
+.input-cont {
+  width: 90% !important;
+}
+
+/* cont-user-geral: serve para juntar os conjuntos do usuario */
+.cont-user-geral {
+  min-width: 100%;
+  background-color: #e0e0e0;
+  height: 75px;
+  margin-top: -50px;
+  border-radius: 10px;
+  padding-left: 10px;
+  border: 3px solid #95877A;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* cont_conteiner: serve para juntar o botão com o ef_traz */
+.cont_conteiner {
+  width: 100%;
+  max-width: 60px;
+  min-height: 70px;
+  position: absolute;
+  transition: 0.5s ease linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  left: 10px;
+}
+
+/* ef_traz: serve para dar o efeito de precionado */
+.cont_conteiner .ef_traz {
+  width: 100%;
+  position: relative;
+  height: 100%;
+  background-color: #95877A;
+  border-radius: 7px;
+  margin-top: 33px;
+}
+
+/* bt_cont: serve para estilizar o dimensionamento do botão dos usuarios */
+.bt_cont {
+  max-width: 50px;
+  max-height: 50px;
+  z-index: 1000;
+  position: relative;
+  top: -2px;
+}
+
+/* bt_conts: serve para estilizar o dimensionamento do botão dos usuarios */
+.bt_conts {
+  max-width: 50px;
+  max-height: 50px;
+  z-index: 1000;
+  position: relative;
+  top: -4.70px;
+  border: 3px solid #95877A;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.selected-users-container {
+  display: flex;
+  white-space: nowrap;
+  max-width: 90% !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-height: 70px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  margin-left: 70px !important;
+  max-width: 100%;
+}
+
+/* selected-users-container::-webkit-scrollbar: serve para almentar o tamanho da scrollbar */
+.selected-users-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.bt_conts,
+.selected-users-container {
+  margin: 10px;
+}
+
+/* add-event-footer: serve para colocar o botão de adicionar lembretes */
+.add-event-footer {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  width: 50%;
+  height: auto;
+}
+
+/* add-event-btn:  estilizar botão de lembretes */
+.add-event-footer .add-event-btn {
+  height: 40px;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  position: relative;
+  padding: 20px;
+  margin: -20px;
+  background-color: var(--primary-clr);
+  border-radius: 5px;
+  cursor: pointer;
+  border: 3px solid #fff;
+  z-index: 1111;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.add-event-footer .add-event-btn:hover {
+  background-color: #fff;
+  color: var(--primary-clr);
+  font-weight: bolder;
+}
+
+.add-event-footer .add-event-btn:active {
+  transform: translateY(5px);
+}
+
+/* ef_traz-btn:  sever para colocar a div atrás do botão de adicionar */
+.ef_traz-btn {
+  width: 79%;
+  height: 50%;
+  position: absolute;
+  top: 5px;
+  background-color: #ffffff;
+  z-index: 1;
+  top: 28px;
+  border-radius: 5px;
+  border: 3px solid #fff;
+}
+
+/* modal:  sever para colocar um modal das cores */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 20% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  top: 0;
+  margin-top: 5%;
+}
+
+
+.color-list {
+  list-style-type: none;
+  padding: 0;
+  border-top: 1px solid #ddd;
+}
+
+.color-list li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.color-list li span:first-child {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.color-list li span:last-child {
+  flex-grow: 1;
+}
+
+/* mod-pess:  sever para colocar um modal das pessoas */
+.mod-pess {
+  max-height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mod-pess-cont {
+  border: none;
+  width: 30vw !important;
+  min-height: 80vh;
+  max-height: 80vh;
+  padding: 50px 30px;
+  background-color: var(--primary-clr);
+  position: relative;
+  overflow: hidden;
+}
+
+.mod-pess-cont-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 60px;
+}
+
+.mod-pess-input {
+  background-color: #E4D5C7;
+  height: 50px;
+  border: 3px solid #95877A;
+  border-radius: 30px;
+  padding: 0px 20px;
+  width: 80%;
+}
+
+.mod-pess-close {
+  background-color: #E4D5C7;
+  float: none;
+  height: 50px;
+  width: 50px;
+  border: 3px solid #95877A;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.mod-pess-card {
+  background-color: #E4D5C7;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  min-height: auto;
+}
+
+#pessoasContainer {
+  max-height: 350px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.mod-pess-card::-webkit-scrollbar {
+  display: none;
+}
+
+.mod-pess-user-cont {
+  background-color: #E4D5C7;
+  display: flex;
+  border-radius: 15px;
+  align-items: center;
+  max-height: 200px;
+  flex-direction: column;
+  width: 100%;
+  justify-content: start;
+}
+
+.mod-pess-user-cont::-webkit-scrollbar {
+  display: none;
+}
+
+.mod-pess-strong {
+  padding-top: 15px;
+  float: left;
+  position: relative;
+  left: 0;
+  padding-bottom: 10px;
+}
+
+.mod-pess-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: mandatory;
+  scroll-behavior: smooth;
+  padding-top: 10px;
+}
+
+.mod-pess-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* mod-pess-user-unit:  colocado para armazenar dados do usuario existentes dentro do modal de pesquisa */
+.mod-pess-user-unit {
+  background-color: #E4D5C7;
+  border: 3px solid #95877A;
+  width: auto;
+  height: 50px;
+  border-radius: 15px;
+  margin: 15px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* mod-pess-unic-pess:  colocado para armazenar dados do usuario selecionado dentro do modal de pesquisa */
+.mod-pess-unic-pess {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  margin: 10px 2px;
+  height: 35px;
+  width: 90%;
+  border-bottom: 3px solid #174738;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+/* container:  sever para juntar o calendario com os lembretes */
+.container {
+  position: relative;
+  width: 20vw;
+  min-height: 850px;
+  margin: 0 auto;
+  padding: 5px;
+  color: #fff;
+  display: flex;
+  right: 0;
+  border-radius: 10px;
+  flex-direction: column;
+  border-left: 3px solid rgba(228, 213, 199, 0.20);
+}
+
+/* left:  a parte de cima do container onde fica o calendario */
+.left {
+  width: 100%;
+  padding: 20px;
+}
+
+/* calendar:  calendario */
+.calendar {
+  position: relative;
+  width: 335px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  color: #878895;
+  border-radius: 5px;
+  margin-top: 50px;
+}
+
+/* month: mês */
+.calendar .month {
+  width: 100%;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.calendar .month .prev,
+.calendar .month .next {
+  cursor: pointer;
+}
+
+.calendar .month .prev:hover,
+.calendar .month .next:hover {
+  color: var(--primary-clr);
+}
+
+/* weekdays: semanas */
+.calendar .weekdays {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--primary-clr);
+  letter-spacing: 0.1rem;
+}
+
+/* weekdays div: dia das semanas */
+.weekdays div {
+  width: 14.28%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+/* days: dias no total */
+.calendar .days {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.calendar .days .active {
+  position: relative;
+  color: #fff !important;
+  background-color: #fff;
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+  z-index: 50;
+}
+.calendar .days:not(.today) .active {
+  background-color: var(--primary-clr) !important;
+}
+
+/* day: dias separadamente */
+.calendar .days .day {
+  width: 14.28%;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--primary-clr);
+  margin-bottom: 10px;
+  z-index: 1000;
+}
+
+/* prev-date e(ou) next-date: dias do mês anterior e(ou) do proximo mês */
+.calendar .days .prev-date,
+.calendar .days .next-date {
+  color: #dadada;
+  cursor: default;
+}
+
+.calendar .days .day:not(.prev-date, .next-date):hover {
+  background-color: #eee;
+  color: var(--primary-clr);
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+  z-index: 10;
+}
+
+/* today: o dia atual */
+.calendar .days .today {
+  font-weight: 700;
+  position: relative;
+  z-index: 10;
+}
+
+.calendar .days .today::after {
+  content: "";
+  position: absolute;
+  background-color: var(--primary-clr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+  top: auto;
+  left: auto;
+  z-index: -100;
+}
+
+.calendar .days .today::before {
+  content: "";
+  position: absolute;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 20%);
+  height: calc(100% - 20%);
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+  top: auto;
+  left: auto;
+  z-index: -1;
+}
+
+.calendar .days .today.active::before {
+  content: "";
+  background-color: var(--primary-clr);
+}
+
+.calendar .days .today.active {
+  background-color: var(--primary-clr);
+  z-index: 50;
+}
+
+/* days.event: marca o dia que tem o evento */
+.calendar .days .event {
+  position: relative;
+  z-index: 500;
+}
+
+.calendar .days .event::after {
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 30px;
+  transform: translateX(-50%);
+  background-color: var(--primary-clr);
+  z-index: 1500;
+}
+
+.calendar .days .day:hover.event::after {
+  background-color: var(--primary-clr);
+}
+
+.calendar .days .active.event::after {
+  background-color: #fff;
+  bottom: 10%;
+}
+
+.calendar .goto-today {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  color: var(--primary-clr);
+}
+
+.calendar .goto {
+  display: none;
+}
+
+.calendar .goto-today .goto button {
+  border: none;
+  border-left: 1px solid var(--primary-clr);
+  border-radius: 0;
+  transition: 4s ease-in linear;
+}
+
+.calendar .goto-today button {
+  padding: 5px 10px;
+  border: 1px solid var(--primary-clr);
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--primary-clr);
+  transition: 4s ease-in linear;
+}
+
+.calendar .goto-today button:hover {
+  color: #fff;
+  background-color: var(--primary-clr);
+  transition: 4s ease-in linear;
+}
+
+/* right:  parte de baixo do calendario, onde aparecerá os lembretes */
+.container .right {
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  transform: translateY(-75px);
+}
+
+.right .today-date {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 35px;
+  padding-left: 50px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.right .today-date .event-day {
+  color: #1C5845;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.right .today-date .event-date {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #878895;
+}
+
+/* events:  o conteiner onde ficará quardada os dados do lembrete, onde aparecerá os lembretes */
+.events {
+  width: 100%;
+  height: 100%;
+  max-height: 275px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+}
+.events::-webkit-scrollbar{
+  display: none;
+}
+/* add-event:  o botão de adicionar os lembretes */
+.add-event {
+  position: absolute;
+  bottom: -65px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #878895;
+  border: 2px solid #878895;
+  opacity: 0.5;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.add-event:hover {
+  opacity: 1;
+}
+
+.add-event i {
+  pointer-events: none;
+}
+
+/* events .event:  o conteiner onde ficará o lembrete, onde terá o titulo e os horários */
+.events .event {
+  position: relative;
+  width: 100%;
+  min-height: 90px;
+  max-height: 90px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #236C56;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 4px solid #174738;
+  margin-bottom: 20px;
+  z-index: 111111111111;
+}
+
+.events .event .cont-color {
+  position: absolute;
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.events .event .color-select-event {
+  width: 50%;
+}
+
+.events .event .color-select-event {
+  width: 60%;
+  height: 80%;
+  background-color: darkcyan;
+  border-top: 4px solid #174738;
+  border-right: 4px solid #174738;
+  border-bottom: 4px solid #174738;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.events .event .cont-principal {
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  left: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.events .event .event-title {
+  margin-left: 10px;
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden; 
+  position: relative;
+}
+
+.events .event .event-title h1 {
+  color: #eee;
+  font-size: 1.4rem;
+  font-weight: 800;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+.ellipsis {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: white; 
+  padding: 0 5px; 
+}
+.events .event .event-time {
+  margin-left: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.events .event .event-time p{
+  color: #eee;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .15rem;
+}
+.events .event .left-confg {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  left: 75%;
+}
+
+.events .event .cont-config {
+  border-radius: 0px 4px 0px 100% ;
+  background-color: #174738;
+  height: 60%;
+  width: 70%;
+  float: right;
+  display: flex;
+  align-items: start;
+  justify-content: flex-end;
+}
+
+.events .event .cont-config i{
+  width: auto;
+  color: #eee;
+  margin: 10px 15px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+/* no-event:  quando não houver eventos */
+.events .no-event {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #111fdf;
+}
+
+/* no-event img:  img que vc aparecer quando não tiver evento */
+.events .no-event img {
+  width: 250px;
+  height: auto;
+}
+/* modal onde tem os dados do event */
+
+.event-modal-content{
+  width: 100vw;
+  background-color: rgba(51, 51, 51, 0.5);
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000000;
+}
+.modal-cont{
+  width: 30%;
+  height: 60%;
+  background-color: #111fdf;
+  border-radius: 25px;
+  overflow: hidden;
+}
+.cont-modal-conteiner{
+  width: 100%;
+  height: 90%;
+  background-color: var(--primary-clr);
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  background: rgb(43,120,95);
+background: linear-gradient(130deg, #236C56 0%, #1C5845 100%);
+}
+
+.content-color{
+  width: 100%;
+  height: 10%;
+  background-color: #fff;
+  top: 0;
+  border-bottom: 5px solid #E4D5C7;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.cont-conteiner-pess-time-desc{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.cont-users{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.contt-user p{
+  background-color: #E4D5C7;
+  margin-right: 25px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: 4px solid #95877A;
+}
+.contt-user{
+  height: 75px;
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  max-width: 100%;
+  align-items: center;
+}
+
+
+.contt-user::-webkit-scrollbar{
+  height: 8px;
+}
+
+.contt-user::-webkit-scrollbar-thumb{
+  background: #174738;
+}
+
+.contt-user::-webkit-scrollbar-button{
+  margin: 20px;
+}
+
+.cont-users strong{
+  font-size: 1.5rem;
+  padding-left: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+.cont-title{
+  width: 100%;
+  height: 75px;
+  padding: 0px 30px;
+  padding-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 50px;
+}
+.cont-title h2{
+  font-size: 1.8rem;
+  letter-spacing: 5px;
+  line-height: 3rem;
+  word-break: break-all;
+  color: #E4D5C7;
+}
+.cont-descrição{
+  width: 93%;
+  min-height: 50%;
+  max-height: 50%;
+  border-radius: 10px;
+  background-color: #E4D5C7;
+  border: 3px solid #95877A;
+  padding: 15px 20px;
+  overflow: hidden;
+  
+}
+.cont-descrição p{
+  font-size: 1.2rem;
+  letter-spacing: .15rem;
+  word-break: break-all;
+  font-weight: 600;
+  color: #6b6258;
+  line-height: 2em;
+  font-family: "Poppins", sans-serif;
+}
+.cont-time{
+  width: 93%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 10px;
+}
+.cont-time p{
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: .1rem;
+  color: #E4D5C7;
+}
+.close-btm{
+  left: 0;
+  position: relative;
+  margin-left: -25px;
+  width: 60px;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+/* wrapper-user:  usuarios selecionados para colocar no lembrete */
+.wrapper-user {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 5px 5px;
+  border-radius: 15px;
+  margin-right: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  height: 50px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* user-icon:  local para separar a img do usuário */
+.user-icon {
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.remove-user {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #333;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* confirm-delete:  modal para comfirmação de deleta */
+.confirm-delete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000000000000000000000000;
+}
+
+/* confirm-delete-box:  conteiner do modal de deleta */
+.confirm-delete-box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 300px;
+}
+
+.confirm-delete-box p {
+  margin-bottom: 20px;
+}
+
+.confirm-delete-box button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-delete-box button.delete-yes {
+  background-color: #e74c3c;
+  color: #ffffff;
+}
+
+.confirm-delete-box button.delete-yes:hover {
+  background-color: #c0392b;
+}
+
+.confirm-delete-box button.delete-no {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
+.confirm-delete-box button.delete-no:hover {
+  background-color: #2980b9;
+}
